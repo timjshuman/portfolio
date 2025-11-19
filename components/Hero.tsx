@@ -1,6 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 
 export default function Hero() {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto text-center">
@@ -27,18 +36,18 @@ export default function Hero() {
           I'm a technical leader with over 20 years of experience solving complex problems and building practical solutions that truly work for businesses and their users. I co-founded my own IT consulting firm, led high-stakes platform launches at Shopify, and scaled data migration services at BigCommerce, always focused on bridging technical excellence with real-world impact.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#contact"
+          <button
+            onClick={() => scrollToSection('contact')}
             className="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             Get In Touch
-          </a>
-          <a
-            href="#projects"
+          </button>
+          <button
+            onClick={() => scrollToSection('projects')}
             className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all border-2 border-gray-300 dark:border-gray-600 transform hover:scale-105"
           >
             View My Work
-          </a>
+          </button>
         </div>
         <div className="mt-12 flex justify-center gap-6">
           <a
