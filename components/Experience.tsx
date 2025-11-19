@@ -28,9 +28,9 @@ export default function Experience() {
       period: '2013 - 2019',
       description: 'Founding member of the data migrations team. Climbed the ranks from engineer, delivering data migrations and developing the core code, to senior manager responsible for product and project management, business functions and oversight of day to day as well as roadmap and deliverables.',
       highlights: [
-        'Developed responsive web applications using React and TypeScript',
-        'Implemented automated testing increasing code coverage to 85%',
-        'Participated in agile development and sprint planning',
+        'Managed a team consisting of customer support specialists and engineers responsible for developing tools that extracted-transformed-loaded data from over 20+ source ecommerce platforms.',
+        'Acted as Product Manager to plan, coordinate and deliver a suite of self-serve data transfer applications extracting from source CSV/XML, MySQL or API and loading over API to destination.',
+        'Led agile development and sprint planning',
       ],
     },
   ];
