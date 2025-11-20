@@ -19,7 +19,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <button
             onClick={() => scrollToSection('hero')}
-            className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
+            className="text-lg text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
           >
             Home
           </button>
@@ -28,31 +28,31 @@ export default function Header() {
           <div className="hidden md:flex space-x-8">
             <button
               onClick={() => scrollToSection('about')}
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
+              className="text-lg text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
             >
               About
             </button>
             <button
               onClick={() => scrollToSection('experience')}
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
+              className="text-lg text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
             >
               Experience
             </button>
             <button
               onClick={() => scrollToSection('skills')}
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
+              className="text-lg text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
             >
               Skills
             </button>
             <button
               onClick={() => scrollToSection('projects')}
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
+              className="text-lg text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
             >
               Projects
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
+              className="text-lg text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
             >
               Contact
             </button>
@@ -86,31 +86,31 @@ export default function Header() {
           <div className="md:hidden py-4 space-y-2">
             <button
               onClick={() => scrollToSection('about')}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
+              className="block w-full text-left px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
             >
               About
             </button>
             <button
               onClick={() => scrollToSection('experience')}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
+              className="block w-full text-left px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
             >
               Experience
             </button>
             <button
               onClick={() => scrollToSection('skills')}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
+              className="block w-full text-left px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
             >
               Skills
             </button>
             <button
               onClick={() => scrollToSection('projects')}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
+              className="block w-full text-left px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
             >
               Projects
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
+              className="block w-full text-left px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
             >
               Contact
             </button>
