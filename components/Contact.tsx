@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -10,36 +11,61 @@ export default function Contact() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      
+      try {
+        let recaptchaToken = '';
+        
+        // Get reCAPTCHA token if available
+        if (executeRecaptcha) {
+          console.log('🔒 Getting reCAPTCHA token...');
+          try {
+            recaptchaToken = await executeRecaptcha('contact_form');
+            console.log('✅ reCAPTCHA token obtained');
+          } catch (recaptchaError) {
+            console.warn('⚠️ Failed to get reCAPTCHA token:', recaptchaError);
+            // Continue without token
+          }
+        } else {
+          console.warn('⚠️ reCAPTCHA not loaded, submitting without verification');
+        }
 
-      const data = await response.json();
+        console.log('📤 Submitting form...');
+        const response = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            recaptchaToken: recaptchaToken || undefined,
+          }),
+        });
 
-      if (response.ok) {
-        alert('Thank you for your message! I will get back to you soon.');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        console.error('Server error:', data);
-        alert(`Oops! ${data.error || 'There was a problem sending your message. Please try again.'}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log('✅ Form submitted successfully!');
+          alert('Thank you for your message! I will get back to you soon.');
+          setFormData({ name: '', email: '', message: '' });
+        } else {
+          console.error('❌ Server error:', data);
+          alert(`Oops! ${data.error || 'There was a problem sending your message. Please try again.'}`);
+        }
+      } catch (error) {
+        console.error('❌ Submission error:', error);
+        alert('Oops! There was a problem sending your message. Please try again.');
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Oops! There was a problem sending your message. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    },
+    [executeRecaptcha, formData]
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
