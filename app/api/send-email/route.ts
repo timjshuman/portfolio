@@ -3,12 +3,17 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-async function verifyRecaptcha(token: string): Promise<boolean> {
+async function verifyRecaptcha(token: string): Promise<{ success: boolean; error?: string }> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   
   if (!secretKey) {
-    console.warn('reCAPTCHA secret key not configured');
-    return true; // Allow submission if not configured
+    console.warn('⚠️ reCAPTCHA secret key not configured - allowing submission without verification');
+    return { success: true };
+  }
+
+  if (!token) {
+    console.warn('⚠️ No reCAPTCHA token provided - allowing submission without verification');
+    return { success: true };
   }
 
   try {
@@ -23,15 +28,23 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
     const data = await response.json();
     
     if (data.success) {
-      console.log('reCAPTCHA verification passed. Score:', data.score);
-      return data.score >= 0.5; // Score threshold (0.0 - 1.0)
+      const score = data.score || 0;
+      console.log('✅ reCAPTCHA verification passed. Score:', score);
+      
+      if (score >= 0.5) {
+        return { success: true };
+      } else {
+        console.warn('⚠️ reCAPTCHA score too low:', score);
+        return { success: false, error: `Low trust score (${score}). Please try again.` };
+      }
     }
     
-    console.error('reCAPTCHA verification failed:', data);
-    return false;
+    console.error('❌ reCAPTCHA verification failed:', data['error-codes']);
+    return { success: false, error: 'reCAPTCHA verification failed' };
   } catch (error) {
-    console.error('reCAPTCHA verification error:', error);
-    return false;
+    console.error('❌ reCAPTCHA verification error:', error);
+    // Allow submission on verification error (fail open)
+    return { success: true };
   }
 }
 
@@ -39,29 +52,28 @@ export async function POST(request: NextRequest) {
   try {
     const { name, email, message, recaptchaToken } = await request.json();
 
-    // Verify reCAPTCHA if token is provided
-    if (recaptchaToken) {
-      const isHuman = await verifyRecaptcha(recaptchaToken);
-      if (!isHuman) {
-        return NextResponse.json(
-          { error: 'reCAPTCHA verification failed. Please try again.' },
-          { status: 400 }
-        );
-      }
-    } else {
-      console.warn('No reCAPTCHA token provided');
+    console.log('📧 Processing contact form submission from:', email);
+
+    // Verify reCAPTCHA
+    const recaptchaResult = await verifyRecaptcha(recaptchaToken);
+    if (!recaptchaResult.success) {
+      console.error('❌ reCAPTCHA check failed:', recaptchaResult.error);
+      return NextResponse.json(
+        { error: recaptchaResult.error || 'Security verification failed. Please try again.' },
+        { status: 400 }
+      );
     }
 
     // Check if Resend API key is configured
     if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY not configured');
+      console.error('❌ RESEND_API_KEY not configured');
       return NextResponse.json(
-        { error: 'Email service not configured. Please contact the site administrator.' },
+        { error: 'Email service not configured. Please add RESEND_API_KEY to environment variables.' },
         { status: 500 }
       );
     }
 
-    console.log('Sending email via Resend...');
+    console.log('📤 Sending email via Resend...');
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>', // Use your verified domain after setup
       to: 'timjshuman@gmail.com', // Your email
@@ -77,14 +89,14 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      console.error('Resend API error:', error);
+      console.error('❌ Resend API error:', error);
       return NextResponse.json({ error: error.message || 'Failed to send email' }, { status: 400 });
     }
 
-    console.log('Email sent successfully:', data);
+    console.log('✅ Email sent successfully!');
     return NextResponse.json({ message: 'Email sent successfully', data }, { status: 200 });
   } catch (error) {
-    console.error('Unexpected error:', error);
+    console.error('❌ Unexpected error:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to send email' },
       { status: 500 }

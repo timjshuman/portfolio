@@ -23,9 +23,19 @@ export default function Contact() {
         
         // Get reCAPTCHA token if available
         if (executeRecaptcha) {
-          recaptchaToken = await executeRecaptcha('contact_form');
+          console.log('🔒 Getting reCAPTCHA token...');
+          try {
+            recaptchaToken = await executeRecaptcha('contact_form');
+            console.log('✅ reCAPTCHA token obtained');
+          } catch (recaptchaError) {
+            console.warn('⚠️ Failed to get reCAPTCHA token:', recaptchaError);
+            // Continue without token
+          }
+        } else {
+          console.warn('⚠️ reCAPTCHA not loaded, submitting without verification');
         }
 
+        console.log('📤 Submitting form...');
         const response = await fetch('/api/send-email', {
           method: 'POST',
           headers: {
@@ -40,14 +50,15 @@ export default function Contact() {
         const data = await response.json();
 
         if (response.ok) {
+          console.log('✅ Form submitted successfully!');
           alert('Thank you for your message! I will get back to you soon.');
           setFormData({ name: '', email: '', message: '' });
         } else {
-          console.error('Server error:', data);
+          console.error('❌ Server error:', data);
           alert(`Oops! ${data.error || 'There was a problem sending your message. Please try again.'}`);
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error('❌ Submission error:', error);
         alert('Oops! There was a problem sending your message. Please try again.');
       } finally {
         setIsSubmitting(false);
