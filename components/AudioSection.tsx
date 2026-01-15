@@ -6,7 +6,7 @@ export default function AudioSection() {
           Case Studies & Project Highlights
         </h2>
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 text-center">
-          An Audio Journey Through my Career & Experience
+          An Audio Journey Through My Career & Experience
         </p>
         <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
           <audio
