@@ -1,7 +1,8 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import AudioSection from '@/components/AudioSection';
 import About from '@/components/About';
+import AudioSection from '@/components/AudioSection';
+import CaseStudyImage from '@/components/CaseStudyImage';
 import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
@@ -15,6 +16,7 @@ export default function Home() {
         <Hero />
         <About />
         <AudioSection />
+        <CaseStudyImage />
         <Experience />
         <Skills />
         <Projects />
