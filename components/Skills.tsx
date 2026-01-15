@@ -2,19 +2,19 @@ export default function Skills() {
   const skillCategories = [
     {
       category: 'Frontend',
-      skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Shopify Liquid', 'PHP'],
+      skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Shopify Liquid', 'PHP', 'Shopify', 'Wordpress', 'Storefronts'],
     },
     {
       category: 'Backend',
-      skills: ['REST APIs', 'GraphQL', 'PostgreSQL', 'MySQL', 'REDIS', 'PHP'],
+      skills: ['REST API', 'GraphQL', 'PostgreSQL', 'MySQL', 'REDIS', 'PHP', 'ETL', 'Debugging'],
     },
     {
       category: 'Cloud & DevOps',
-      skills: ['AWS', 'Azure', 'Git', 'Vercel'],
+      skills: ['AWS', 'Azure', 'Vercel', 'Servers', 'Github', 'Networking'],
     },
     {
       category: 'Tools & Others',
-      skills: ['Agile/Scrum', 'Jira', 'Linux', 'Salesforce'],
+      skills: ['Agile/Scrum', 'Jira', 'Linux', 'Salesforce', 'AI', 'Migration', 'Strategy', 'Documentation'],
     },
   ];
 
