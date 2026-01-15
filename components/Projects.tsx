@@ -5,7 +5,7 @@ export default function Projects() {
       description: 'A data migration suite of Apps that allows allows merchants to move customers, orders and products from one platform to another. Via SQL, API, or CSV import and built on years of experience.',
       technologies: ['PHP', 'REDIS', 'AWS', 'MYSQL', 'REST APIs'],
       link: 'https://www.bigcommerce.com/apps/data-migration-services-shopify/',
-      linkText: 'Shopify data migration',
+      linkText: 'Bigcommerce data migration',
     },
     {
       title: 'High GMV Merchant Flash Sale',
