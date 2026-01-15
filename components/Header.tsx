@@ -39,6 +39,12 @@ export default function Header() {
               Experience
             </button>
             <button
+              onClick={() => scrollToSection('audio')}
+              className="text-lg text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
+            >
+              (audio)
+            </button>
+            <button
               onClick={() => scrollToSection('skills')}
               className="text-lg text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-bold"
             >
@@ -95,6 +101,12 @@ export default function Header() {
               className="block w-full text-left px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
             >
               Experience
+            </button>
+            <button
+              onClick={() => scrollToSection('audio')}
+              className="block w-full text-left px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 rounded-lg transition-colors font-bold"
+            >
+              (audio)
             </button>
             <button
               onClick={() => scrollToSection('skills')}
