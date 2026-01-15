@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import AudioSection from '@/components/AudioSection';
 import About from '@/components/About';
 import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
@@ -13,6 +14,7 @@ export default function Home() {
       <main>
         <Hero />
         <About />
+        <AudioSection />
         <Experience />
         <Skills />
         <Projects />
@@ -26,20 +28,20 @@ export default function Home() {
           <div className="mt-4 flex justify-center gap-6">
             <a
               href="https://www.linkedin.com/in/timshuman/"
-              target="_blank"
-              rel="noopener noreferrer"
+            target="_blank"
+            rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
             >
               LinkedIn
-            </a>
-            <a
+          </a>
+          <a
               href="https://github.com/timjshuman"
-              target="_blank"
-              rel="noopener noreferrer"
+            target="_blank"
+            rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
-            >
+          >
               GitHub
-            </a>
+          </a>
           </div>
         </div>
       </footer>

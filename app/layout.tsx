@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReCaptchaProvider>
-          {children}
+        {children}
         </ReCaptchaProvider>
       </body>
     </html>
